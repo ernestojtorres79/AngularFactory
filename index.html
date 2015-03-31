@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html ng-app="carModule">
+<head>
+    <title></title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="_angularFactory.js"></script>
+</head>
+<body style="background-color:#c3c3c3;">
+    <div class="container" ng-controller="carController">
+        <div class="panel panel-heading">
+            <h1 class="h1">Angular Factory</h1>
+            <h3 class="h3">Car Collection</h3>
+        </div>
+        <div class="panel panel-body">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <input ng-model="model" class="form-control" placeholder="Model" />
+                </div>
+                <div class="col-md-3">
+                    <input ng-model="make" class="form-control" placeholder="Make" />
+                </div>
+                <div class="col-md-3">
+                    <input ng-model="value" class="form-control" placeholder="Value" />
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary" ng-click="carCollector()">Add to Collection</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-body">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <input ng-model="search" class="form-control" placeholder="Search" />
+                </div>
+                <div class="col-md-3">
+                    <select ng-model="records" ng-options="limit.num as limit.text for limit in limits">
+                    </select>
+                </div>
+            </div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th><h3 class="h3">Model</h3></th>
+                        <th><h3 class="h3">Make</h3></th>
+                        <th><h3 class="h3">Value</h3></th>
+                        <th><h3 class="h3">Edit</h3></th>
+                        <th><h3 class="h3">Delete</h3></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="car in carArray | filter:search | limitTo:records">
+                        <td><h5>{{car.Model}}</h5></td>
+                        <td><h5>{{car.Make}}</h5></td>
+                        <td><h5>{{car.Value}}</h5></td>
+                        <td><button ng-click="editVehicles($index)" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></button></td>
+                        <td><button ng-click="delVehicles(car.key)" class="btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
